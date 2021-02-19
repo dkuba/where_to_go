@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from django.utils.safestring import mark_safe
+from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 
 from .models import Place, Image
 
 admin.site.register(Image)
 
 
-class ImageInline(admin.TabularInline):
+class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
     readonly_fields = ["sample_image", ]
 
