@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 
 def image_number_default(obj):
@@ -9,8 +10,9 @@ class Place(models.Model):
     """Место"""
 
     title = models.CharField('Наименование', max_length=50)
+
     description_short = models.TextField('Краткое описание')
-    description_long = models.TextField('Полное описание')
+    description_long = HTMLField('Полное описание')
     latitude = models.FloatField('Широта')
     longitude = models.FloatField('Долгота')
 

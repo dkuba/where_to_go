@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from where_to_go import views
 import places.views as places_views
@@ -24,7 +24,8 @@ import places.views as places_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('places/<int:place_id>', places_views.place),
-    path('', views.index)
+    path('', views.index),
+    path('tinymce/', include('tinymce.urls')),
 ]
 
 
