@@ -1,0 +1,12 @@
+asgiref==3.3.1
+dj-database-url==0.5.0
+Django==3.1.6
+django-admin-sortable2==0.7.8
+django-easymode==0.14.5
+django-tinymce==3.2.0
+environs==9.3.1
+marshmallow==3.10.0
+Pillow==8.1.0
+python-dotenv==0.15.0
+pytz==2021.1
+sqlparse==0.4.1
