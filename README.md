@@ -35,3 +35,7 @@ python manage.py runserver
 - `SERVERNAMES` — список разрешенных серверов
 - `DATABASE_URL` — url для доступа к базе данных, например "sqlite:///db.sqlite3"
 
+###Ссылка на работающий сайт
+
+http://dkuba.pythonanywhere.com/
+
