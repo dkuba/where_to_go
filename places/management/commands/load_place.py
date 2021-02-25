@@ -12,16 +12,14 @@ class Command(BaseCommand):
         parser.add_argument('place_json_url', type=str)
 
     def handle(self, *args, **options):
-        resp = requests.get(url=options['place_json_url'])
-        data = resp.json()
-        Place.objects.get_or_create(
-            title=data['title'],
-            description_short=data['description_short'],
-            description_long=data['description_long'],
-            latitude=data['coordinates']['lat'],
-            longitude=data['coordinates']['lng'],
+        place_info = requests.get(url=options['place_json_url']).json()
+        place = Place.objects.get_or_create(
+            title=place_info['title'],
+            defaults={'description_short': place_info['description_short'],
+                      'description_long': place_info['description_long'],
+                      'latitude': place_info['coordinates']['lat'],
+                      'longitude': place_info['coordinates']['lng']}
         )
-        place = list(Place.objects.all())[-1]
-        for image_url in data['imgs']:
+        for image_url in place_info['imgs']:
             new_url = os.path.join('places', image_url.split('media')[1].replace('/', ''))
             Image.objects.create(place=place, image=new_url)

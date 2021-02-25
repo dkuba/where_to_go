@@ -4,20 +4,18 @@ from django.shortcuts import render
 from places.models import Place
 
 
-def get_place_details(place: Place) -> dict:
-    place_detail_dict = {'title': place.title, 'imgs': [],
-                       'coordinates': {}}
-    place_detail_dict['coordinates']['lng'] = place.longitude
-    place_detail_dict['coordinates']['lat'] = place.latitude
+def get_place_details(place: Place):
+    place_detail = {'title': place.title, 'imgs': [],
+                         'coordinates': {'lng': place.longitude, 'lat': place.latitude}}
 
     for image in place.images.all():
-        place_detail_dict['imgs'].append(image.image.url)
+        place_detail['imgs'].append(image.image.url)
 
-    place_detail_dict['description_short'] = place.description_short
-    place_detail_dict['description_long'] = place.description_long
-    return place_detail_dict
+    place_detail['description_short'] = place.short_description
+    place_detail['description_long'] = place.long_description
+    return place_detail
 
 
-def place(request, place_id):
+def get_place(request, place_id):
     place = Place.objects.get(id=place_id)
-    return JsonResponse(get_place_details(place))
+    return JsonResponse(get_place_details(place), json_dumps_params={'indent': 2, 'ensure_ascii': False})

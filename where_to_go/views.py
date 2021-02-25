@@ -5,8 +5,8 @@ from django.shortcuts import render
 from places.models import Place
 
 
-def get_places_info() -> dict:
-    places_info_dict = {'type': 'FeatureCollection', 'features': []}
+def get_places_info():
+    places_info = {'type': 'FeatureCollection', 'features': []}
 
     for place in Place.objects.all():
         feature_dict = {
@@ -24,11 +24,10 @@ def get_places_info() -> dict:
                 'detailsUrl': f'places/{place.id}'
             }
         }
-        places_info_dict['features'].append(feature_dict)
+        places_info['features'].append(feature_dict)
 
-    return places_info_dict
+    return places_info
 
 
 def index(request):
-    data = {'places_info': get_places_info()}
-    return render(request, 'index.html', context=data)
+    return render(request, 'index.html', context={'places_info': get_places_info()})

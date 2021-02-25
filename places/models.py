@@ -11,8 +11,8 @@ class Place(models.Model):
 
     title = models.CharField('Наименование', max_length=50)
 
-    description_short = models.TextField('Краткое описание')
-    description_long = HTMLField('Полное описание')
+    short_description = models.TextField('Краткое описание', null=True, blank=True)
+    long_description = HTMLField('Полное описание', null=True, blank=True)
     latitude = models.FloatField('Широта')
     longitude = models.FloatField('Долгота')
 
@@ -27,18 +27,12 @@ class Place(models.Model):
 class Image(models.Model):
     """Картинки"""
 
-    @staticmethod
-    def get_next_item_number():
-        return Image.objects.count() + 1
-
     place = models.ForeignKey(Place, verbose_name='Место',
                               related_name='images',
-                              on_delete=models.CASCADE, default=None)
-    image = models.ImageField('Картинка',
-                              upload_to='places', null=True, blank=True)
+                              on_delete=models.CASCADE)
+    image = models.ImageField('Картинка', upload_to='places')
     number = models.PositiveBigIntegerField(
-        'Порядковый номер', null=False,
-        blank=False, default=get_next_item_number.__func__)
+        'Порядковый номер', default=0, null=True, blank=True)
 
     class Meta(object):
         ordering = ['number']

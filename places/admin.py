@@ -13,13 +13,7 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def sample_image(self, obj):
         """Изображение"""
-        return format_html(
-            '<img src="{url}" max-width={width} max-height={height} '
-            'style="max-height:200px;"/>'.format(
-                url=obj.image.url,
-                width=obj.image.width,
-                height=obj.image.height,
-            ))
+        return format_html('<img src="{}" style="max-height:200px;"/>', obj.image.url)
 
 
 @admin.register(Place)

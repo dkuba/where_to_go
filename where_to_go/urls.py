@@ -23,7 +23,7 @@ import places.views as places_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('places/<int:place_id>', places_views.place),
+    path('places/<int:place_id>', places_views.get_place),
     path('', views.index),
     path('tinymce/', include('tinymce.urls')),
 ]
