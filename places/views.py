@@ -6,13 +6,14 @@ from places.models import Place
 
 def get_place_details(place: Place):
     place_detail = {'title': place.title, 'imgs': [],
-                         'coordinates': {'lng': place.longitude, 'lat': place.latitude}}
+                    'description_short': place.short_description,
+                    'description_long': place.long_description,
+                    'coordinates': {'lng': place.longitude,
+                                    'lat': place.latitude}, }
 
     for image in place.images.all():
         place_detail['imgs'].append(image.image.url)
 
-    place_detail['description_short'] = place.short_description
-    place_detail['description_long'] = place.long_description
     return place_detail
 
 
