@@ -7,8 +7,8 @@ from django.urls import reverse
 from places.models import Place
 
 
-def get_places_info():
-    places_info = {'type': 'FeatureCollection', 'features': []}
+def get_places():
+    places = {'type': 'FeatureCollection', 'features': []}
 
     for place in Place.objects.all():
         feature_dict = {
@@ -26,10 +26,10 @@ def get_places_info():
                 'detailsUrl': reverse('place', args=(place.id,))
             }
         }
-        places_info['features'].append(feature_dict)
+        places['features'].append(feature_dict)
 
-    return places_info
+    return places
 
 
 def index(request):
-    return render(request, 'index.html', context={'places_info': get_places_info()})
+    return render(request, 'index.html', context={'places_info': get_places()})
