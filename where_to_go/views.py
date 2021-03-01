@@ -2,6 +2,8 @@ import uuid
 
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
+
 from places.models import Place
 
 
@@ -21,7 +23,7 @@ def get_places_info():
             'properties': {
                 'title': place.title,
                 'placeId': place.id,
-                'detailsUrl': f'places/{place.id}'
+                'detailsUrl': reverse('place', args=(place.id,))
             }
         }
         places_info['features'].append(feature_dict)
