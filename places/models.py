@@ -11,8 +11,8 @@ class Place(models.Model):
 
     title = models.CharField('Наименование', max_length=50)
 
-    short_description = models.TextField('Краткое описание', null=True, blank=True)
-    long_description = HTMLField('Полное описание', null=True, blank=True)
+    short_description = models.TextField('Краткое описание', blank=True)
+    long_description = HTMLField('Полное описание', blank=True)
     latitude = models.FloatField('Широта')
     longitude = models.FloatField('Долгота')
 
@@ -32,7 +32,7 @@ class Image(models.Model):
                               on_delete=models.CASCADE)
     image = models.ImageField('Картинка', upload_to='places')
     number = models.PositiveBigIntegerField(
-        'Порядковый номер', default=0, null=True, blank=True)
+        'Порядковый номер', default=0, blank=True)
 
     class Meta(object):
         ordering = ['number']
