@@ -14,7 +14,8 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     def sample_image(self, obj):
         """Изображение"""
         try:
-            return format_html('<img src="{}" style="max-height:200px;"/>',
+            return format_html('<img src="{}" style="max-height:200px;'
+                               'max-width:200px;"/>',
                                obj.image.url)
         except ValueError:
             return format_html('Здесь будет картинка')
