@@ -34,6 +34,7 @@ class Command(BaseCommand):
                       'longitude': decoded_response['coordinates']['lng']}
         )
 
-        for image_url in decoded_response['imgs']:
-            new_url = os.path.join('places', image_url.split('media')[1].replace('/', ''))
-            Image.objects.create(place=place_entity[0], image=new_url)
+        if place_entity:
+            for image_url in decoded_response['imgs']:
+                new_url = os.path.join('places', image_url.split('media')[1].replace('/', ''))
+                Image.objects.create(place=place_entity[0], image=new_url)
