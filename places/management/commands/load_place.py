@@ -1,5 +1,6 @@
 import logging
 import os
+from urllib.parse import urlparse, unquote
 
 import requests
 from django.core.management.base import BaseCommand
@@ -36,5 +37,6 @@ class Command(BaseCommand):
 
         if place_entity:
             for image_url in decoded_response['imgs']:
-                new_url = os.path.join('places', image_url.split('media')[1].replace('/', ''))
+                parsed_url = urlparse(image_url)
+                new_url = os.path.join('places', os.path.basename(unquote(parsed_url.path)))
                 Image.objects.create(place=place_entity[0], image=new_url)
