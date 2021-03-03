@@ -1,5 +1,4 @@
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.http import JsonResponse
 
 from places.models import Place
 
@@ -9,7 +8,7 @@ def get_place_details(place: Place):
                     'description_short': place.short_description,
                     'description_long': place.long_description,
                     'coordinates': {'lng': place.longitude,
-                                           'lat': place.latitude}, }
+                                    'lat': place.latitude}, }
 
     for image in place.images.all():
         place_detail['imgs'].append(image.image.url)

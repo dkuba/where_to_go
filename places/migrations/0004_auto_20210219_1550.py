@@ -12,7 +12,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='image',
-            options={'ordering': ['number'], 'verbose_name': 'Картинка', 'verbose_name_plural': 'Картинки'},
+            options={'ordering': ['number'], 'verbose_name': 'Картинка',
+                     'verbose_name_plural': 'Картинки'},
         ),
         migrations.AlterModelOptions(
             name='place',

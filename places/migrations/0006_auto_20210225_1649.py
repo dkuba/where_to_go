@@ -23,16 +23,21 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='place',
             name='long_description',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name='Полное описание'),
+            field=tinymce.models.HTMLField(blank=True, null=True,
+                                           verbose_name='Полное описание'),
         ),
         migrations.AddField(
             model_name='place',
             name='short_description',
-            field=models.TextField(blank=True, null=True, verbose_name='Краткое описание'),
+            field=models.TextField(blank=True, null=True,
+                                   verbose_name='Краткое описание'),
         ),
         migrations.AlterField(
             model_name='image',
             name='place',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='places.place', verbose_name='Место'),
+            field=models.ForeignKey(on_delete=django.db.models.
+                                    deletion.CASCADE,
+                                    related_name='images', to='places.place',
+                                    verbose_name='Место'),
         ),
     ]

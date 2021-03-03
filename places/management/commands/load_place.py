@@ -29,7 +29,8 @@ class Command(BaseCommand):
 
         place_entity = Place.objects.get_or_create(
             title=decoded_response['title'],
-            defaults={'short_description': decoded_response['description_short'],
+            defaults={'short_description': decoded_response['description_'
+                                                            'short'],
                       'long_description': decoded_response['description_long'],
                       'latitude': decoded_response['coordinates']['lat'],
                       'longitude': decoded_response['coordinates']['lng']}
@@ -38,5 +39,7 @@ class Command(BaseCommand):
         if place_entity:
             for image_url in decoded_response['imgs']:
                 parsed_url = urlparse(image_url)
-                new_url = os.path.join('places', os.path.basename(unquote(parsed_url.path)))
+                new_url = \
+                    os.path.join('places',
+                                 os.path.basename(unquote(parsed_url.path)))
                 Image.objects.create(place=place_entity[0], image=new_url)

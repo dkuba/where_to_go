@@ -15,10 +15,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Place',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=50, verbose_name='Наименование')),
-                ('description_short', models.TextField(verbose_name='Краткое описание')),
-                ('description_long', models.TextField(verbose_name='Полное описание')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=50,
+                                           verbose_name='Наименование')),
+                ('description_short', models.TextField(verbose_name='Краткое '
+                                                                    'описание'
+                                                                    '')),
+                ('description_long', models.TextField(
+                    verbose_name='Полное описание')),
                 ('latitude', models.FloatField(verbose_name='Широта')),
                 ('longitude', models.FloatField(verbose_name='Долгота')),
             ],
@@ -26,10 +31,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Image',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(blank=True, null=True, upload_to='places', verbose_name='Картинка')),
-                ('number', models.IntegerField(unique=True, verbose_name='Порядковый номер')),
-                ('place', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, related_name='images', to='places.place', verbose_name='Место')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
+                ('image', models.ImageField(blank=True, null=True,
+                                            upload_to='places',
+                                            verbose_name='Картинка')),
+                ('number', models.IntegerField(unique=True,
+                                               verbose_name='Порядковый '
+                                                            'номер')),
+                ('place', models.ForeignKey(default=None,
+                                            on_delete=django.db.models
+                                            .deletion.CASCADE,
+                                            related_name='images',
+                                            to='places.place',
+                                            verbose_name='Место')),
             ],
         ),
     ]

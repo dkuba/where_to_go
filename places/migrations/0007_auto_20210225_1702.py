@@ -13,11 +13,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='image',
             name='image',
-            field=models.ImageField(upload_to='places', verbose_name='Картинка'),
+            field=models.ImageField(upload_to='places',
+                                    verbose_name='Картинка'),
         ),
         migrations.AlterField(
             model_name='image',
             name='number',
-            field=models.PositiveBigIntegerField(blank=True, default=0, null=True, verbose_name='Порядковый номер'),
+            field=models.PositiveBigIntegerField(blank=True, default=0,
+                                                 null=True,
+                                                 verbose_name='Порядковый '
+                                                              'номер'),
         ),
     ]

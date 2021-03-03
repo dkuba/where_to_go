@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='image',
             name='number',
-            field=models.PositiveBigIntegerField(verbose_name='Порядковый номер'),
+            field=models.PositiveBigIntegerField(verbose_name='Порядковый'
+                                                              ' номер'),
         ),
     ]
