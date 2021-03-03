@@ -40,7 +40,7 @@
     }
   </style>
 
-  {{ places_info|json_script:"places-geojson" }}
+  {{ geojson_formatted_places|json_script:"places-geojson" }}
 
   <script id="app-template" type="text/template">
     <div v-bind:class="{'sidebar-content': 1, 'bg-white': selectedPlace, 'bg-secondary': !selectedPlace}">

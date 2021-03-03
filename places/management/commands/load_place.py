@@ -1,4 +1,3 @@
-import logging
 import os
 from urllib.parse import urlparse, unquote
 
@@ -15,19 +14,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        try:
-            response = requests.get(url=options['place_json_url'])
-            response.raise_for_status()
-        except requests.exceptions.HTTPError as err:
-            logging.error(err)
-            return
+        response = requests.get(url=options['place_json_url'])
+        response.raise_for_status()
 
         decoded_response = response.json()
-        if 'error' in decoded_response:
-            logging.error('Сервер вернул ошибку')
-            return
 
-        place_entity = Place.objects.get_or_create(
+        place_entity, place_created = Place.objects.get_or_create(
             title=decoded_response['title'],
             defaults={'short_description': decoded_response['description_'
                                                             'short'],
@@ -36,10 +28,10 @@ class Command(BaseCommand):
                       'longitude': decoded_response['coordinates']['lng']}
         )
 
-        if place_entity:
+        if place_created:
             for image_url in decoded_response['imgs']:
                 parsed_url = urlparse(image_url)
                 new_url = \
                     os.path.join('places',
                                  os.path.basename(unquote(parsed_url.path)))
-                Image.objects.create(place=place_entity[0], image=new_url)
+                Image.objects.create(place=place_entity, image=new_url)

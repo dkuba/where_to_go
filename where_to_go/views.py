@@ -4,7 +4,7 @@ from django.urls import reverse
 from places.models import Place
 
 
-def get_places():
+def get_geojson_formatted_places():
     places = {'type': 'FeatureCollection', 'features': []}
 
     for place in Place.objects.all():
@@ -29,4 +29,6 @@ def get_places():
 
 
 def index(request):
-    return render(request, 'index.html', context={'places_info': get_places()})
+    return render(request, 'index.html',
+                  context={'geojson_formatted_places':
+                           get_geojson_formatted_places()})
